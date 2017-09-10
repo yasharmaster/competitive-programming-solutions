@@ -3,6 +3,7 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -26,19 +27,33 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 
+bool func(string &source) {
+	for (int i=0; i<source.size(); i++) {
+		switch(source[i]) {
+			case 'H':
+			case 'Q':
+			case '9':
+				return true;
+		}
+	}
+	return false;
+}
+
 int main(){
 	fast_io;
 	if(fopen("tupni.txt", "r")) {
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
+	
+	string source;
+	cin >> source;
 
-
+	if (func(source)) {
+		cout << "YES";
+	} else {
+		cout << "NO";
 	}
+
 	return 0;
 }

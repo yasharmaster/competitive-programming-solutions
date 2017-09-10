@@ -3,6 +3,7 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -32,13 +33,22 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
+	
+	int n;
+	cin >> n;
 
-
+	n -= 10;
+	int ans;
+	
+	if (n>=1 && n<=9 || n == 11) {
+		ans = 4;
+	} else if (n == 10) {
+		ans = 15;
+	} else {
+		ans = 0;
 	}
+
+	cout << ans;
+
 	return 0;
 }

@@ -3,7 +3,11 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #include <string>
+#include <iomanip>
+
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
 #define wi(x) what_is(x, '\n')
@@ -32,13 +36,17 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
-
-
+	
+	int n;
+	cin >> n;
+	double sum = 0, temp;
+	REP(i, n) {
+		cin >> temp;
+		sum += temp;
 	}
+    std::cout << std::fixed;
+    std::cout << std::setprecision(5);
+	sum /= n;
+	cout << sum;
 	return 0;
 }

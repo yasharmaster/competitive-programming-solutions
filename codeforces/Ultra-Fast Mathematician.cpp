@@ -3,6 +3,7 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -32,13 +33,17 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
+	
+	string A, B;
+	cin >> A >> B;
 
-
+	for (int i=0; i<A.size(); i++) {
+		if (A[i] == B[i]) {
+			cout << 0;
+		} else {
+			cout << 1;
+		}
 	}
+
 	return 0;
 }

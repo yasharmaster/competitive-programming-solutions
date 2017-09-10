@@ -3,6 +3,8 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -32,13 +34,25 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
-
-
+	
+	int n, even_count = 0, odd_count = 0, sum = 0, temp;
+	cin >> n;
+	for (int i=0; i<n; i++) {
+		cin >> temp;
+		if (temp&1) {
+			odd_count++;
+			sum++;
+		} else {
+			even_count++;
+			sum += 2;
+		}
 	}
+
+	if (sum&1) {
+		cout << odd_count;
+	} else {
+		cout << even_count;
+	}
+
 	return 0;
 }

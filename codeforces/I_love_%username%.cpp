@@ -3,6 +3,7 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -26,19 +27,39 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 
+int count_amazing(int *A, int n) {
+	if (n <= 1) {
+		return 0;
+	}
+	int amazing = 0;
+	int min = A[0], max = A[0];
+	for (int i=1; i<n; i++) {
+		if (A[i] < min) {
+			amazing += 1;
+			min = A[i];
+		}
+		else if (A[i] > max) {
+			amazing += 1;
+			max = A[i];
+		}
+	}
+	return amazing;
+}
+
 int main(){
 	fast_io;
 	if(fopen("tupni.txt", "r")) {
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
-
-
+	
+	int n;
+	cin >> n;
+	int *A = new int[n];
+	REP(i, n) {
+		cin >> A[i];
 	}
+	cout << count_amazing(A, n);
+
 	return 0;
 }

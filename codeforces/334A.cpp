@@ -3,6 +3,8 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -32,13 +34,18 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
-
-
+	
+	int n;
+	cin >> n;
+	int square = n*n, x = 1;
+	REP(i, n) {
+		REP(j, n/2) {
+			cout << x << " " << square << " ";
+			x++;
+			square--;
+		}
+		cout << endl;
 	}
+
 	return 0;
 }

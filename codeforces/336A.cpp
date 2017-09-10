@@ -3,7 +3,11 @@
 #include <climits>
 #include <stack>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #include <string>
+#include <iomanip>
+
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
 #define wi(x) what_is(x, '\n')
@@ -32,13 +36,18 @@ int main(){
 		freopen("tupni.txt", "r", stdin);
 		freopen("tuptuo.txt", "w", stdout);
 	}
-	int t;
-	cin >> t;
-	while (t--) {
-	    int n;
-	    cin >> n;
-
-
-	}
+	
+	int x,y;
+	cin >> x >> y;
+	int ans = abs(x)+abs(y);
+	if (x > 0 && y > 0) {
+		cout << 0 << " " << ans << " " << ans << " " << 0;
+ 	} else if (x < 0 && y < 0) {
+ 		cout << -1*ans << " " << 0 << " " << 0 << " " << -1*ans;
+ 	} else if (x > 0 && y < 0) {
+ 		cout << 0 << " " << -1*ans << " " << ans << " " << 0;
+ 	} else if (x < 0 && y > 0) {
+ 		cout << -1*ans << " " << 0 << " " << 0 << " " << ans;
+ 	}
 	return 0;
 }

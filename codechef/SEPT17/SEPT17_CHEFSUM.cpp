@@ -37,8 +37,24 @@ int main(){
 	while (t--) {
 	    int n;
 	    cin >> n;
-
-
+	    int B[100005];
+	    int A[n], prefix[n];
+	    int total_sum = 0;
+	    REP(i, n){
+	    	cin >> A[i];
+	    	total_sum += A[i];
+	    	prefix[i] = total_sum;
+	    }
+	    int min_sum = INT_MAX, sum, index = 0;
+	    REP(i, n){
+	    	sum = prefix[i]+total_sum;
+	    	if (sum < min_sum) {
+	    		min_sum = sum;
+	    		index = i;
+	    	}
+	    	total_sum -= A[i];
+	    }
+	    cout << index+1 << endl;
 	}
 	return 0;
 }
