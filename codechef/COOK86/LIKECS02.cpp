@@ -26,25 +26,6 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 
-const int MOD = 1000000007;
-const int MAXN = 100000;
-
-inline void add(ll &a, ll b)
-{
-    a += b;
-    if (a >= MOD) {
-        a -= MOD;
-    }
-}
-
-inline void subtract(ll &a, ll b)
-{
-    a -= b;
-    if (a < 0) {
-        a += MOD;
-    }
-}
-
 int main(){
 	fast_io;
 	if(fopen("tupni.txt", "r")) {
@@ -56,8 +37,28 @@ int main(){
 	while (t--) {
 	    int n;
 	    cin >> n;
-
-
+	    float mean;
+	    bool ans = false;
+	    FOR(i, 1, n) {
+	    	float mean = 0;
+	    	FOR(k, i, i+n-1){
+	    		mean += k;
+	    	}
+	    	mean /= float(n);
+		    if (mean >= n-1 && mean <= n+1) {
+		    	int count = n;
+		    	while (count--) {
+		    		cout << i << " ";
+		    		i++;
+		    	}
+		    	ans = true;
+		    	break;
+		    }
+	    }
+	    if (false) {
+	    	cout << "-1";
+	    }
+	    cout << endl;
 	}
 	return 0;
 }

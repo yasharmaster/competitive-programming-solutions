@@ -20,7 +20,6 @@
 #define mp make_pair
 #define pb push_back
 #define fast_io     ios_base::sync_with_stdio(0);cin.tie(NULL)
-#define MODULO 1000000007
  
 using namespace std;
  
@@ -28,6 +27,27 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
  
+const int MOD = 1000000007;
+const int MAXN = 100000;
+
+struct ModInt {
+    int x;
+    ModInt(int _x) {
+        x = _x % M;
+        if (x < 0) x += M;
+    }
+    ModInt& operator+=(ModInt rhs) {
+        x += rhs.x;
+        if (x >= M) x -= M;
+        return *this;
+    }
+    ModInt& operator-=(ModInt rhs) {
+        x -= rhs.x;
+        if (x < 0) x += M;
+        return *this;
+    }
+};
+
 bool is_valid_index(int i,  int m) {
 	return i < m && i >= 0;
 }
@@ -43,76 +63,47 @@ int main(){
 	while (t--) {
 	    ll n, m;
 	    cin >> n >> m;
-	    vector<ll> I(m, 0), P(m, 0), C(n, 0), T(m), L(m), R(m);
+	    vector<ll> Count(m+2, 0), DCount(m+1, 0), C(n+1, 0), T(m+1), L(m+1), R(m+1);
  
 	    ll t, l, r;
-	    REP(i, m) {
+	    FOR(i, 1, m) {
 	    	cin >> t >> l >> r;
 	    	T[i] = t;
-	    	L[i] = l-1;
-	    	R[i] = r-1;
+	    	L[i] = l;
+	    	R[i] = r;
 	    }
 		
-		REP(i, m) {
-			int inc_index = i, dec_index = i-1;
-			if (is_valid_index(inc_index, m)) {
-				P[inc_index]++;
-			}
-			if (is_valid_index(dec_index, m)) {
-				P[dec_index]--;
-			}
-		}
- 
-		if (DBG) {
-			cout << "Printing P vector\n";
-			REP(i, m) {
-				cout << P[i] << " ";
-			}
-			cout << endl;
-		}
- 
 		FORD(i, m-1, 0) {
-			if(T[i] == 2) {
-				int inc_index = R[i], dec_index = L[i]-1;
-				if (is_valid_index(inc_index, m)) {
-					P[inc_index] += P[i]%MODULO;
+			Count[i] = Count[i+1] + DCount[i];
+			if (T[i] == 2) {
+				if (is_valid_index(L[i]-1, m)) {
+					subtract(DCount[L[i]-1], Count[i]);
 				}
-				if (is_valid_index(dec_index, m)) {
-					P[dec_index] -= P[i]%MODULO;
-				}
+				add(DCount[R[i]], Count[i]);
 			}
-			else if (T[i] == 1) {
-				I[i] = P[i]%MODULO;
-			}
-			if (i-1 >= 0) {
-				P[i-1] += P[i]%MODULO;
-			}
-		}
- 
+		} 
+
 		if (DBG) {
-			cout << "Printing I vector\n";
 			REP(i, m) {
-				cout << I[i] << " ";
+				cout << Count[i] << " ";
 			}
 			cout << endl;
 		}
- 
-		REP(i,m) {
+
+		REP(i, m) {
 			if (T[i] == 1) {
-				int inc_index = L[i], dec_index = R[i]+1;
+				int dec_index = R[i]+1, inc_index = L[i];
 				if (is_valid_index(inc_index, n)) {
-					C[inc_index] += I[i]%MODULO;
+					add(C[inc_index], Count[i]);
 				}
 				if (is_valid_index(dec_index, n)) {
-					C[dec_index] -= I[i]%MODULO;
+					subtract(C[dec_index], Count[i]);
 				}
 			}
 		}
- 
-		REP(i, n) {
-			if (i-1 >= 0){
-				C[i] += C[i-1]%MODULO;
-			}
+
+		FOR(i, 1, n-1){
+			add(C[i], C[i-1]); 
 		}
 		
 		REP(i, n) {

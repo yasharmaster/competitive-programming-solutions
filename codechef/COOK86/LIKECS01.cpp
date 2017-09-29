@@ -26,23 +26,15 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 
-const int MOD = 1000000007;
-const int MAXN = 100000;
-
-inline void add(ll &a, ll b)
-{
-    a += b;
-    if (a >= MOD) {
-        a -= MOD;
-    }
-}
-
-inline void subtract(ll &a, ll b)
-{
-    a -= b;
-    if (a < 0) {
-        a += MOD;
-    }
+bool equal_subsequences(string &A) {
+	REP(i, A.size()) {
+		size_t found = A.find(A[i]);
+		found = A.find(A[i], found+1);
+		if (found != string::npos) {
+			return true;
+		}
+	}
+	return false;
 }
 
 int main(){
@@ -54,10 +46,14 @@ int main(){
 	int t;
 	cin >> t;
 	while (t--) {
-	    int n;
-	    cin >> n;
-
-
+	    string str;
+	    cin >> str;
+	    if (equal_subsequences(str)) {
+	    	cout << "yes";
+	    } else {
+	    	cout << "no";
+	    }
+	    cout << endl;
 	}
 	return 0;
 }
